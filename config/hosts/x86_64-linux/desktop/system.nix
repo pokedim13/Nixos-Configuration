@@ -5,6 +5,10 @@
   ];
 
   # Мы наследуемся от общей конфигурации, имейтете ввиду, что её настройки могут конфликтовать с нашими
+  
+  # Специфичная настройка btrfs для десктопа
+  disko.devices.disk.nixos.device = "/dev/sda"; # Путь к диску для десктопа
+  disko.devices.disk.nixos.content.partitions.root.content.options = [ "compress=zstd:7" "noatime" ];
 
   # Использование новейшего ядра Linux
   boot.kernelPackages = pkgs.master.linuxPackages_latest;

@@ -2,6 +2,7 @@
     imports = [
         "${flake.conf.overlays}/nixpkgs"
         flake.conf.modules
+        ./modules/btrfs
 
         (modulesPath + "/installer/scan/not-detected.nix")
     ];

@@ -2,7 +2,7 @@
   disko.devices = lib.mkDefault {
     disk = {
       nixos = {
-        device = lib.mkDefault "/dev/sda";
+        device = lib.mkDefault "/dev/sdc";
         type = "disk";
         content = {
           type = "gpt";
@@ -42,7 +42,7 @@
                 type = "filesystem";
                 format = "btrfs";
                 mountpoint = "/";
-                options = [ "compress=zstd:7" "noatime" ];
+                options = lib.mkDefault [ "compress=zstd:7" "noatime" ];
               };
             };
             # Nixos disk partition END
