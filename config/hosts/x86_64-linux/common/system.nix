@@ -2,10 +2,14 @@
     imports = [
         "${flake.conf.overlays}/nixpkgs"
         flake.conf.modules
-        ./modules/btrfs
 
         (modulesPath + "/installer/scan/not-detected.nix")
     ];
+
+    modules.fs.btrfs = {
+        enable = true;
+        device = "/dev/sdc";
+    };
 
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
 

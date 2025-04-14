@@ -5,10 +5,18 @@
   ];
 
   # Мы наследуемся от общей конфигурации, имейтете ввиду, что её настройки могут конфликтовать с нашими
-  
-  # Специфичная настройка btrfs для десктопа
-  disko.devices.disk.nixos.device = "/dev/sda"; # Путь к диску для десктопа
-  disko.devices.disk.nixos.content.partitions.root.content.options = [ "compress=zstd:7" "noatime" ];
+
+  # Включаем btrfs с настройками
+  modules.fs.btrfs = {
+    enable = true;
+    device = "/dev/sdc"; # Путь к диску для десктопа
+    mountOptions = [
+      "compress=zstd:7"  # Алгоритм сжатия и уровень
+      "noatime"          # Отключение обновления времени доступа
+      "space_cache=v2"   # Улучшенный кэш
+      "ssd"              # Оптимизации для SSD
+    ];
+  };
 
   # Использование новейшего ядра Linux
   boot.kernelPackages = pkgs.master.linuxPackages_latest;
