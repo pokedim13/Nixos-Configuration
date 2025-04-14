@@ -1,8 +1,8 @@
 {
   # Структура путей конфига
   home = ./home;
-  hosts = ./hosts;
   hm-modules = ./hm-modules;
+  hosts = ./hosts;
   modules = ./modules;
   overlays = ./overlays;
   users = ./users; 
