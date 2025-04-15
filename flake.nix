@@ -25,13 +25,25 @@
   outputs = { self, flake-parts, ... }@inputs: flake-parts.lib.mkFlake { inherit inputs; } {
     systems = ["x86_64-linux"];
 
+    perSystem = { pkgs, ... }: {
+      # perSystem outputs here
+    };
+
     flake = {
       conf = builtins.trace "Importing config" import ./config;
+      
       nixosConfigurations = import "${self.conf.utils}/hosts.nix" {
         inherit inputs;
         flake = self;
       };
-      # TODO: Добавить home-manager
+
+      homeConfigurations.sweetdogs = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = inputs.nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = { inherit inputs; flake = self; };
+        modules = [
+          ./config/home/sweetdogs
+        ];
+      };
     };
   };
 }
