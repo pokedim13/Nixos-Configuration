@@ -12,8 +12,10 @@ let
       };
       modules = [
         { networking.hostName = hostname; }
-        inputs.disko.nixosModules.disko
+        "${flake.conf.overlays}/nixpkgs"
         "${flake.conf.utils}/users.nix"
+        inputs.disko.nixosModules.disko
+        inputs.sops.nixosModules.sops
       ] ++ modules;
     };
 
